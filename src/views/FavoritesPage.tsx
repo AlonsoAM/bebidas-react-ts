@@ -1,6 +1,10 @@
+import Header from "../components/Header.tsx";
+
 const FavoritesPage = () => {
   return (
-    <div>FavoritesPage</div>
+    <>
+      <Header/>
+    </>
   )
 }
 export default FavoritesPage

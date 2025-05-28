@@ -1,6 +1,10 @@
+import Header from "../components/Header.tsx";
+
 const IndexPage = () => {
   return (
-    <div>IndexPage</div>
+    <>
+      <Header/>
+    </>
   )
 }
 export default IndexPage
