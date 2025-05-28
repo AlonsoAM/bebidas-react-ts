@@ -1,10 +1,12 @@
 import {NavLink, useLocation} from "react-router-dom";
+import {useMemo} from "react";
 
 const Header = () => {
-  
+
   const {pathname} = useLocation()
 
-  console.log({pathname})
+  const isHome = useMemo(() => pathname === '/', [pathname])
+  console.log({isHome})
 
 
   return (
@@ -28,6 +30,32 @@ const Header = () => {
               >Favoritos</NavLink>
             </nav>
           </div>
+          {isHome && (
+            <form className={'md:w-1/2 2xl:w-1/3 bg-orange-400 rounded-lg p-10 my-32 shadow space-y-6'}>
+              <div className={'space-y-4'}>
+                <label htmlFor={'ingredient'}
+                       className={'block text-white uppercase font-extrabold text-lg'}>Nombre o ingrediente</label>
+                <input type="text"
+                       id={'ingredient'}
+                       name={'ingredient'}
+                       className={'block w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500'}
+                       placeholder={'Nombre o ingrediente. Ej: Vodka, Tequila, etc.'}/>
+              </div>
+              <div className={'space-y-4'}>
+                <label htmlFor={'category'}
+                       className={'block text-white uppercase font-extrabold text-lg'}>Cetegoría</label>
+                <select
+                  id={'category'}
+                  name={'category'}
+                  className={'block w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500'}>
+                  <option value={''}>--Seleccione--</option>
+                </select>
+              </div>
+              <input type="submit"
+                     className={'block w-full bg-orange-800 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-900 transition-all duration-300 ease-in-out transform hover:scale-102'}
+                     value={'Buscar Recetas'}/>
+            </form>
+          )}
         </div>
       </header>
     </>
