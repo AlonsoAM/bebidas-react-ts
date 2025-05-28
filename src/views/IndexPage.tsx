@@ -1,9 +1,7 @@
-import Header from "../components/Header.tsx";
-
 const IndexPage = () => {
   return (
     <>
-      <Header/>
+      <h1>Inicio</h1>
     </>
   )
 }
