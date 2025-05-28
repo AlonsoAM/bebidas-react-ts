@@ -1,4 +1,5 @@
 import {z} from 'zod/v4'
-import type {CategoriesApiResponseSchema} from "../utils/recipes-schema.ts";
+import {type CategoriesApiResponseSchema, SearchFilterSchema} from "../utils/recipes-schema.ts";
 
 export type Categories = z.infer<typeof CategoriesApiResponseSchema>
+export type SearchFilter = z.infer<typeof SearchFilterSchema>

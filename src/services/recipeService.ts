@@ -9,4 +9,5 @@ export const getCategories = async () => {
   if (result.success) {
     return result.data
   }
+
 }

@@ -1,8 +1,13 @@
 import {NavLink, useLocation} from "react-router-dom";
-import {useEffect, useMemo} from "react";
+import {type FormEvent, useEffect, useMemo, useState} from "react";
 import {useAppStore} from "../stores/useAppStore.ts";
 
 const Header = () => {
+
+  const [searchFilters, setSearchFilters] = useState({
+    ingredient: '',
+    category: '',
+  });
 
   const {pathname} = useLocation()
 
@@ -10,11 +15,25 @@ const Header = () => {
 
   const fetchCategories = useAppStore(state => state.fetchCategories)
   const categories = useAppStore(state => state.categories)
+  const searchRecipes = useAppStore(state => state.searchRecipes)
 
   useEffect(() => {
     fetchCategories()
   }, [])
 
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    // TODO: Validar y agregar notificación
+    if (Object.values(searchFilters).some(value => value === '')) {
+      console.log('Faltan campos por completar')
+      return
+    }
+
+    // Consultar recetas
+    await searchRecipes(searchFilters)
+  }
 
   return (
     <>
@@ -38,7 +57,8 @@ const Header = () => {
             </nav>
           </div>
           {isHome && (
-            <form className={'md:w-1/2 2xl:w-1/3 bg-orange-400 rounded-lg p-10 my-32 shadow space-y-6'}>
+            <form onSubmit={handleSubmit}
+              className={'md:w-1/2 2xl:w-1/3 bg-orange-400 rounded-lg p-10 my-32 shadow space-y-6'}>
               <div className={'space-y-4'}>
                 <label htmlFor={'ingredient'}
                        className={'block text-white uppercase font-extrabold text-lg'}>Nombre o ingrediente</label>
@@ -46,6 +66,8 @@ const Header = () => {
                        id={'ingredient'}
                        name={'ingredient'}
                        className={'block w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500'}
+                       onChange={e => setSearchFilters({...searchFilters, ingredient: e.target.value})}
+                       value={searchFilters.ingredient}
                        placeholder={'Nombre o ingrediente. Ej: Vodka, Tequila, etc.'}/>
               </div>
               <div className={'space-y-4'}>
@@ -54,6 +76,8 @@ const Header = () => {
                 <select
                   id={'category'}
                   name={'category'}
+                  onChange={e => setSearchFilters({...searchFilters, category: e.target.value})}
+                  value={searchFilters.category}
                   className={'block w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500'}>
                   <option value={''}>--Seleccione--</option>
                   {categories.drinks.map(category => (
