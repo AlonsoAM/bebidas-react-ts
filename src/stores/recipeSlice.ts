@@ -8,6 +8,7 @@ export interface RecipeSlice {
   recipes: Recipes
   fetchCategories: () => Promise<void>
   searchRecipes: (searchFilter: SearchFilter) => Promise<void>
+  selectRecipe: (id: Recipes['drinks'][0]['idDrink']) => Promise<void>
 }
 
 export const createRecipesSlice: StateCreator<RecipeSlice> = (set) => ({
@@ -24,5 +25,8 @@ export const createRecipesSlice: StateCreator<RecipeSlice> = (set) => ({
   searchRecipes: async (searchFilters) => {
     const recipes = await getRecipes(searchFilters)
     set({recipes})
+  },
+  selectRecipe: async (id: Recipes['drinks'][0]['idDrink']) => {
+    console.log(id)
   }
 })

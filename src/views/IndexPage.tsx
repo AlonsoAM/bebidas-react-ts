@@ -8,8 +8,6 @@ const IndexPage = () => {
 
   const hasRecipes = useMemo(()=> recipes.drinks.length > 0 , [recipes])
 
-  console.log(hasRecipes)
-
 
   return (
     <>

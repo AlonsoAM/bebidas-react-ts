@@ -1,10 +1,14 @@
 import type {Recipes} from "../types";
+import {useAppStore} from "../stores/useAppStore.ts";
 
 type DrinkCardProps = {
   drink: Recipes['drinks'][0]
 }
 
 const DrinkCard = ({drink}: DrinkCardProps) => {
+
+  const selectRecipe = useAppStore(state => state.selectRecipe)
+
   return (
     <div className={'bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col'}>
       <div className={'relative'}>
@@ -19,6 +23,7 @@ const DrinkCard = ({drink}: DrinkCardProps) => {
         <h2 className={'text-2xl truncate font-black text-gray-800'}>{drink.strDrink}</h2>
         <button type={'button'}
                 className={'bg-orange-500 w-full text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-600 transition-all duration-300 ease-in-out transform hover:scale-105 mt-auto'}
+                onClick={() => selectRecipe(drink.idDrink)}
         >Ver Receta</button>
       </div>
     </div>
