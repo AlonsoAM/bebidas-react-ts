@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const Header = () => {
   return (
     <>
@@ -7,9 +9,14 @@ const Header = () => {
             <div>
               <img className={'w-32'} src={'/logo.svg'} alt={'logo'}/>
             </div>
-            <div>
-
-            </div>
+            <nav className={'flex gap-4'}>
+              <Link to={'/'}
+                    className={'text-white uppercase font-bold'}
+              >Inicio</Link>
+              <Link to={'/favoritos'}
+                    className={'text-white uppercase font-bold'}
+              >Favoritos</Link>
+            </nav>
           </div>
         </div>
       </header>
