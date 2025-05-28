@@ -9,6 +9,7 @@ const Header = () => {
   const isHome = useMemo(() => pathname === '/', [pathname])
 
   const fetchCategories = useAppStore(state => state.fetchCategories)
+  const categories = useAppStore(state => state.categories)
 
   useEffect(() => {
     fetchCategories()
@@ -55,6 +56,9 @@ const Header = () => {
                   name={'category'}
                   className={'block w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-orange-500'}>
                   <option value={''}>--Seleccione--</option>
+                  {categories.drinks.map(category => (
+                    <option key={category.strCategory} value={category.strCategory}>{category.strCategory}</option>
+                  ))}
                 </select>
               </div>
               <input type="submit"
