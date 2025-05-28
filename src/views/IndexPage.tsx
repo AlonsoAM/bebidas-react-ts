@@ -1,11 +1,4 @@
-import {useAppStore} from "../stores/useAppStore.ts";
-
 const IndexPage = () => {
-
-  const categories = useAppStore(state => state.categories)
-
-  console.log(categories)
-
 
   return (
     <>
