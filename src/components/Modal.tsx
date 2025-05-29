@@ -67,26 +67,28 @@ export default function Modal() {
                   <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-300 rounded-lg">
                       <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                            Ingrediente
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                            Cantidad
-                          </th>
-                        </tr>
+                      <tr>
+                        <th
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                          Ingrediente
+                        </th>
+                        <th
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                          Cantidad
+                        </th>
+                      </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {getIngredients().map((item, index) => (
-                          <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              {item.ingredient}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {item.measure}
-                            </td>
-                          </tr>
-                        ))}
+                      {getIngredients().map((item, index) => (
+                        <tr key={index} className="hover:bg-gray-50">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {item.ingredient}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {item.measure}
+                          </td>
+                        </tr>
+                      ))}
                       </tbody>
                     </table>
                   </div>
@@ -103,7 +105,19 @@ export default function Modal() {
                 <p className="text-gray-500 text-2xl">Bebida no tiene receta!</p>
               </div>
             )}
+            <div className={' mt-5 flex justify-between gap-4'}>
+              <button type={'button'}
+                      onClick={closeModal}
+                      className={'block w-full bg-gray-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
+                Cerrar
+              </button>
+              <button type={'button'}
+                      onClick={()=> {}}
+                      className={'block w-full bg-orange-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
+                Agregar a Favoritos
+              </button>
 
+            </div>
           </Dialog.Panel>
         </div>
       </div>
