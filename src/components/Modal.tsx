@@ -11,6 +11,7 @@ export default function Modal() {
   const closeModal = useAppStore(state => state.closeModal)
   const selectedRecipe = useAppStore(state => state.selectedRecipe)
   const handleClickFavorite = useAppStore(state => state.handleClickFavorite)
+  const favoriteExists = useAppStore(state => state.favoriteExists)
 
   // Función para obtener los ingredientes y cantidades
   const getIngredients = () => {
@@ -100,25 +101,24 @@ export default function Modal() {
                 <Dialog.Description>
                   <p className="text-gray-700 leading-relaxed">{selectedRecipe.strInstructionsES}</p>
                 </Dialog.Description>
+                <div className={' mt-5 flex justify-between gap-4'}>
+                  <button type={'button'}
+                          onClick={closeModal}
+                          className={'block w-full bg-gray-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
+                    Cerrar
+                  </button>
+                  <button type={'button'}
+                          onClick={() => handleClickFavorite(selectedRecipe)}
+                          className={'block w-full bg-orange-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
+                    {favoriteExists(selectedRecipe.idDrink) ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}
+                  </button>
+                </div>
               </>
             ) : (
               <div className="text-center py-8">
                 <p className="text-gray-500 text-2xl">Bebida no tiene receta!</p>
               </div>
             )}
-            <div className={' mt-5 flex justify-between gap-4'}>
-              <button type={'button'}
-                      onClick={closeModal}
-                      className={'block w-full bg-gray-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
-                Cerrar
-              </button>
-              <button type={'button'}
-                      onClick={()=> handleClickFavorite(selectedRecipe!)}
-                      className={'block w-full bg-orange-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
-                Agregar a Favoritos
-              </button>
-
-            </div>
           </Dialog.Panel>
         </div>
       </div>
