@@ -13,7 +13,11 @@ export type NotificationSliceType = {
 
 
 export const createNotificationSlice: StateCreator<NotificationSliceType> = () => ({
-  notification: {} as Notification,
+  notification: {
+    text: '',
+    error: false,
+    show: false,
+  },
   showNotification: (text, error) => {
     console.log(text, error)
   }

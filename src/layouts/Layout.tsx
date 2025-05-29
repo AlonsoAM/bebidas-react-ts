@@ -3,6 +3,7 @@ import {Outlet} from "react-router-dom";
 import Modal from "../components/Modal.tsx";
 import {useEffect} from "react";
 import {useAppStore} from "../stores/useAppStore.ts";
+import Notification from "../components/Notification.tsx";
 
 const Layout = () => {
 
@@ -19,6 +20,7 @@ const Layout = () => {
         <Outlet/>
       </main>
       <Modal/>
+      <Notification/>
     </>
   )
 }
