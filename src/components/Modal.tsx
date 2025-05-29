@@ -10,6 +10,7 @@ export default function Modal() {
   const modal = useAppStore(state => state.modal)
   const closeModal = useAppStore(state => state.closeModal)
   const selectedRecipe = useAppStore(state => state.selectedRecipe)
+  const handleClickFavorite = useAppStore(state => state.handleClickFavorite)
 
   // Función para obtener los ingredientes y cantidades
   const getIngredients = () => {
@@ -112,7 +113,7 @@ export default function Modal() {
                 Cerrar
               </button>
               <button type={'button'}
-                      onClick={()=> {}}
+                      onClick={()=> handleClickFavorite(selectedRecipe!)}
                       className={'block w-full bg-orange-600 text-white uppercase font-extrabold text-lg rounded-md py-3 px-4 cursor-pointer hover:bg-orange-700 transition-all duration-300 ease-in-out transform hover:scale-102'}>
                 Agregar a Favoritos
               </button>
