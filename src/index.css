@@ -2,6 +2,6 @@
 
 @layer utilities {
   .bg-header {
-    background-image: url('/public/bg.jpg');
+    background-image: url('/bg.jpg');
   }
 }
