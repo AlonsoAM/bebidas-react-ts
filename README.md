@@ -30,6 +30,7 @@
 - **Búsqueda de Bebidas**: Encuentra recetas de cócteles por nombre, ingrediente o categoría
 - **Vista Detallada**: Explora los ingredientes, medidas e instrucciones de preparación
 - **Favoritos**: Guarda tus recetas preferidas para acceder rápidamente después
+- **Generación de Recetas con IA**: Crea nuevas recetas de bebidas usando inteligencia artificial
 - **Diseño Responsivo**: Experiencia de usuario optimizada para dispositivos móviles y escritorio
 - **Animaciones Suaves**: Transiciones fluidas entre vistas y componentes
 - **Carga Diferida**: Implementación de lazy loading para mejorar el rendimiento
@@ -47,6 +48,7 @@ Esta aplicación está construida utilizando una pila tecnológica moderna:
 - **Tailwind CSS 4**: Framework de CSS utilitario para diseño personalizado
 - **Headless UI 2**: Componentes UI accesibles sin estilos predefinidos
 - **Axios**: Cliente HTTP basado en promesas para solicitudes a la API
+- **OpenRouter AI**: Integración con modelos de IA para generar recetas de cócteles
 - **Zod**: Validación de esquemas para datos externos
 
 ## 🏗️ Estructura del Proyecto
@@ -56,10 +58,12 @@ bebidas-react-ts/
 ├── public/                # Activos estáticos públicos
 ├── src/                   # Código fuente principal
 │   ├── components/        # Componentes reutilizables
-│   │   ├── DrinkCard.tsx      # Tarjeta de bebida
-│   │   ├── Header.tsx         # Cabecera de la aplicación
-│   │   ├── Modal.tsx          # Modal para detalle de receta
-│   │   └── Notification.tsx   # Componente de notificaciones
+│   │   ├── DrinkCard.tsx         # Tarjeta de bebida
+│   │   ├── GeneratingIndicator.tsx # Indicador de generación de IA
+│   │   ├── Header.tsx            # Cabecera de la aplicación
+│   │   ├── Modal.tsx             # Modal para detalle de receta
+│   │   ├── Notification.tsx      # Componente de notificaciones
+│   │   └── RecipeDisplay.tsx     # Visualización de recetas generadas por IA
 │   ├── layouts/           # Plantillas de página
 │   │   └── Layout.tsx         # Layout principal con navegación
 │   ├── stores/            # Gestión de estado global (Zustand)
@@ -73,6 +77,7 @@ bebidas-react-ts/
 │   ├── utils/             # Utilidades y funciones auxiliares
 │   ├── views/             # Páginas/vistas principales
 │   │   ├── FavoritesPage.tsx  # Página de favoritos
+│   │   ├── GenerateAI.tsx     # Página de generación de recetas con IA
 │   │   └── IndexPage.tsx      # Página principal
 │   ├── router.tsx         # Configuración de rutas
 │   ├── main.tsx           # Punto de entrada de la aplicación
@@ -126,15 +131,15 @@ Esta aplicación consume la API pública TheCocktailDB para obtener información
 - **Modal**: Componente para mostrar detalles completos de una receta
 - **SearchForm**: Formulario para buscar bebidas por diferentes criterios
 - **Layout**: Estructura principal de la aplicación con navegación
+- **GeneratingIndicator**: Indicador visual del proceso de generación de recetas con IA
+- **RecipeDisplay**: Muestra las recetas generadas por inteligencia artificial
 
 ## 📚 Estado Global
 La aplicación utiliza Zustand para la gestión del estado, dividido en slices:
 - **recipeSlice**: Gestiona las recetas de bebidas y búsquedas
 - **favoritesSlice**: Maneja las bebidas marcadas como favoritas
 - **notificationSlice**: Controla las notificaciones al usuario
-
-## 📈 Funcionalidades Futuras
-- [ ] Generar Recetas con Inteligencia Artificial
+- **aiSlice**: Gestiona la generación de recetas mediante inteligencia artificial
 
 ---
 
