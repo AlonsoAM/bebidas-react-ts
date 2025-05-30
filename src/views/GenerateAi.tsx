@@ -1,12 +1,25 @@
-import type {FormEvent} from "react";
+import { useEffect, useRef} from "react";
 import {useAppStore} from "../stores/useAppStore.ts";
+import GeneratingIndicator from "../components/GeneratingIndicator";
+import RecipeDisplay from "../components/RecipeDisplay";
+import * as React from "react";
 
 export default function GenerateAI() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const showNotification = useAppStore(state => state.showNotification)
   const generateRecipe = useAppStore(state => state.generateRecipe)
+  const recipe = useAppStore(state => state.recipe)
+  const isGenerating = useAppStore(state => state.isGenerating)
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (recipe && !isGenerating && inputRef.current) {
+      inputRef.current.value = '';
+    }
+  }, [recipe, isGenerating]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const form = new FormData(e.currentTarget)
@@ -20,19 +33,20 @@ export default function GenerateAI() {
     await generateRecipe(prompt)
 
   }
-
-
+  
   return (
     <>
       <h1 className="text-6xl font-extrabold">Generar Receta con IA</h1>
 
       <div className="max-w-4xl mx-auto">
         <form
+          ref={formRef}
           onSubmit={handleSubmit}
           className='flex flex-col space-y-3 py-10'
         >
           <div className="relative">
             <input
+              ref={inputRef}
               name="prompt"
               id="prompt"
               className="border bg-white p-4 rounded-lg w-full border-slate-800"
@@ -41,7 +55,8 @@ export default function GenerateAI() {
             <button
               type="submit"
               aria-label="Enviar"
-              className={`cursor-pointer absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2`}
+              disabled={isGenerating}
+              className={`cursor-pointer absolute top-1/2 right-5 transform -translate-x-1/2 -translate-y-1/2 ${isGenerating ? 'cursor-not-allowed opacity-50' : ''}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                    stroke="currentColor" className="w-10 h-10">
@@ -51,10 +66,8 @@ export default function GenerateAI() {
             </button>
           </div>
         </form>
-
-        <div className="py-10 whitespace-pre-wrap">
-
-        </div>
+        <GeneratingIndicator isGenerating={isGenerating} />
+        <RecipeDisplay recipe={recipe} isGenerating={isGenerating} />
       </div>
 
     </>
