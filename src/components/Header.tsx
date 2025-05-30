@@ -53,6 +53,11 @@ const Header = () => {
                          isActive ? 'uppercase font-bold text-orange-500' : 'uppercase font-bold text-white'
                        }
               >Favoritos</NavLink>
+              <NavLink to={'/generate'}
+                       className={({isActive}) =>
+                         isActive ? 'uppercase font-bold text-orange-500' : 'uppercase font-bold text-white'
+                       }
+              >Generar con IA</NavLink>
             </nav>
           </div>
           {isHome && (
